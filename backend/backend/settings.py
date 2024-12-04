@@ -74,9 +74,13 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'chat_db',  # Nombre de la base de datos
+        'USER': 'postgres',  # Usuario de PostgreSQL
+        'PASSWORD': 'root',  # Contraseña del usuario
+        'HOST': 'localhost',  # Dirección del servidor PostgreSQL
+        'PORT': '5432',  # Puerto del servidor PostgreSQL
     }
 }
 
