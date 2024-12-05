@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Django Channels
+    'channels',
+    'message'
 ]
 
 MIDDLEWARE = [
@@ -67,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'backend.wsgi.application'
+ASGI_APPLICATION = 'backend.asgi.application'
 
 
 # Database
@@ -86,6 +89,15 @@ DATABASES = {
             'sslrootcert': '/path/to/your/ca-certificate.crt',  
         },
     }
+}
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',  # Usando Redis como backend
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6380)],  # Configuración de Redis
+        },
+    },
 }
 
 
