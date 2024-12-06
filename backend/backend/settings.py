@@ -1,6 +1,12 @@
 from pathlib import Path
 import os
 
+from pathlib import Path
+from dotenv import load_dotenv
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(os.path.join(BASE_DIR, '.env'))
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -8,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-p!j$dbl^g87h20+428smu37z_5em@mag*u#3j-4z*5hl^&+8=#')
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
@@ -69,14 +75,14 @@ ASGI_APPLICATION = 'backend.asgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME', 'defaultdb'),
-        'USER': os.getenv('DB_USER', 'avnadmin'),
-        'PASSWORD': os.getenv('DB_PASSWORD', 'AVNS_4ODKt82gAWedBzPI6Bo'),
-        'HOST': os.getenv('DB_HOST', 'pg-38506ddc-italianomariano198-edb1.e.aivencloud.com'),
-        'PORT': os.getenv('DB_PORT', '28983'),
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
         'OPTIONS': {
-            'sslmode': 'require',  # Requiere SSL
-            'sslrootcert': os.getenv('SSL_ROOT_CERT_PATH', '/path/to/your/ca-certificate.crt'),
+            'sslmode': 'require',
+            'sslrootcert': os.getenv('SSL_ROOT_CERT_PATH'),
         },
     }
 }
@@ -128,3 +134,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+print("DB_USER:", os.getenv('DB_USER'))
