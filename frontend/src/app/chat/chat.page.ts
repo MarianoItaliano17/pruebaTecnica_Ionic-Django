@@ -24,7 +24,6 @@ export class ChatPage implements OnInit {
 
   ngOnDestroy() {
     // Asegurarse de que la conexión WebSocket se cierre cuando se destruye el componente
-    // Si es necesario, puedes cerrar la conexión desde el servicio.
     this.chatService.ngOnDestroy();
   }
 

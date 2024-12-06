@@ -5,14 +5,18 @@
 </ion-header>
 
 <ion-content>
-  <div *ngFor="let msg of messages">
-    <!-- Asegúrate de que msg es solo el contenido del mensaje -->
-    <p>{{ msg }}</p>
-  </div>
+  <ion-grid>
+    <ion-col size="12">
+      <div *ngFor="let msg of messages">
+        <p>{{ msg }}</p>
+      </div>
 
-  <ion-item>
-    <ion-input [(ngModel)]="message" placeholder="Escribe tu mensaje..."></ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-input [(ngModel)]="message" placeholder="Escribe tu mensaje..."></ion-input>
+      </ion-item>
 
-  <ion-button (click)="sendMessage()">Enviar</ion-button>
+      <ion-button (click)="sendMessage()">Enviar</ion-button>
+    </ion-col>
+  </ion-grid>
+
 </ion-content>
