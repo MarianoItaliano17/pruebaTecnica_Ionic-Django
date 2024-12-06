@@ -128,7 +128,7 @@ docker exec -it <nombre_contenedor_backend> python manage.py migrate
 
 # Instrucciones para Ejecución Local
 1. Backend:
-   - Ejecuta docker-compose up para iniciar Redis y el backend.
+   - Ejecuta `docker-compose up` para iniciar Redis y el backend.
      
 2. Frontend:
    - Ejecuta `ng serve` en la carpeta del frontend.
