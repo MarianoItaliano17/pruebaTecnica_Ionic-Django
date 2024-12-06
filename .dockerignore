@@ -1,0 +1,5 @@
+backend/myenv/              # Ignorar el entorno virtual de Django
+.git/               # Ignorar la carpeta git
+backend/.env                # Ignorar el archivo de variables de entorno
+*.gitignore         # Ignorar el archivo .gitignore en la construcción
+*.dockerignore      # Ignorar el archivo .dockerignore en la construcción
