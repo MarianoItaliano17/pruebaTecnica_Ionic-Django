@@ -79,3 +79,66 @@ docker exec -it <nombre_contenedor_backend> python manage.py migrate
   ionic serve
 ```
 - El frontend estará disponible en http://localhost:8100
+
+
+
+# Despliegue en Producción
+### 1. Frontend (Ionic/Angular)
+#### a. Construcción para Producción
+- Ejecuta:
+```bash
+  ionic build --prod
+```
+- Esto generará los archivos estáticos en la carpeta `www/`
+
+
+#### b. Hospedaje
+- Sube los archivos generados a un servicio como Netlify, Vercel, o Firebase.
+- Configura la redirección de rutas en el servicio de hospedaje para manejar el enrutamiento de Ionic/Angular.
+
+### 2. Backend (Django)
+#### a. Configuración para Producción
+- Actualiza el archivo `.env` para incluir:
+```bash
+  DEBUG=False
+  ALLOWED_HOSTS='dominio.com,www.dominio.com'
+```
+
+#### b. Despliegue
+- Usa un servicio como Koyeb, Heroku, o Render.
+- Configura el uso de Daphne para manejar WebSockets:
+  1. Cambia el servidor de desarrollo (runserver) por Daphne en docker-compose.yml.
+  2. Ejemplo de configuración:
+     ```bash
+     command: daphne -b 0.0.0.0 -p 8000 proyecto.asgi:application
+     ```
+#### c. Migraciones y Archivos Estáticos
+- Ejecuta en el servidor:
+  ```bash
+  python manage.py collectstatic --noinput
+  python manage.py migrate
+  ```
+### 3. Gestión de Variables de Entorno y Secretos
+- Usa un administrador de secretos como *AWS Secrets Manager*, *Vault* o configura un archivo `.env` seguro.
+
+### 4. Base de Datos PostgreSQL y Redis
+- PostgreSQL ya está alojado en la nube. Asegúrate de que las IP del backend tengan permisos para acceder.
+- Redis está configurado para producción como un servicio en Docker, pero también puedes usar un servicio de Redis administrado (como AWS ElastiCache).
+
+
+# Instrucciones para Ejecución Local
+1. Backend:
+   - Ejecuta docker-compose up para iniciar Redis y el backend.
+     
+2. Frontend:
+   - Ejecuta `ng serve` en la carpeta del frontend.
+     
+3. Asegúrate de que el archivo `.env` tenga las credenciales correctas de PostgreSQL para la ejecución local.
+
+# Herramientas Utilizadas
+- Frontend: Ionic 7, Angular 18
+- Backend: Django 5.1, Django Rest Framework, Django Channels
+- Base de Datos: PostgreSQL (en la nube)
+- Caché: Redis
+- Contenedores: Docker y Docker Compose
+
